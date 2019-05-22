@@ -14,9 +14,7 @@ def get_metadata(csv_url, id)
     open(csv_url) do |u|
       csv_file_name = File.basename(csv_url)
       csv_file_path = "#{@config.output_dir}/#{csv_file_name}"
-      unless File.exists?(csv_file_path)
-        File.open(csv_file_path, 'wb') { |f| f.write(u.read) }
-      end
+      File.open(csv_file_path, 'wb') { |f| f.write(u.read) }
       CSV.read(csv_file_path, 'r:bom|utf-8', headers: true).each do |row|
         if row.header?("Identifier")
           if row.field("Identifier") == id
@@ -62,11 +60,13 @@ if ARGV.length != 5
 end
 
 @csv_url = ARGV[0]
-# path to the image files end with "obj_id/image.tif" 
-@input_folder = ARGV[1]
-
+csv_name = File.basename(@csv_url)
+collection_id = csv_name.scan(/Ms\d{4}_\d{3}/)[0]
+# path to the image files end with "obj_id/image.tif"
+image_folder_path = ARGV[1]
+@input_folder = image_folder_path.slice(image_folder_path.index("#{collection_id}")..-1)
 # read files in the input_folder
-@image_files = Dir[@input_folder + "*"].sort
+@image_files = Dir[image_folder_path + "*"].sort
 
 # Setup Temporary stores
 @data = []
