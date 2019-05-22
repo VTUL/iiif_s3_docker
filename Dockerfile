@@ -10,3 +10,4 @@ RUN apt-get install imagemagick
 
 COPY . .
 
+CMD ["./createiiif.sh"]
