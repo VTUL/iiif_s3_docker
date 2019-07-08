@@ -6,7 +6,7 @@ WORKDIR /usr/local/iiif
 
 RUN gem install --no-user-install --no-document iiif_s3
 
-RUN apt-get install imagemagick
+RUN apt-get install imagemagick awscli
 
 COPY . .
 
