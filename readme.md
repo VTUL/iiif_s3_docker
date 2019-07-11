@@ -2,9 +2,14 @@
 This project packages [iiif_s3](https://github.com/cmoa/iiif_s3) into a docker image
 
 ## Getting Started
-* Usage
+* Build the docker image
 ```
-docker run  --env AWS_ACCESS_KEY_ID=**** -e AWS_SECRET_ACCESS_KEY="****" -e AWS_BUCKET_NAME=s3_bucket_name -e AWS_REGION=region -it -v mount_path docker_image ./createiiif.sh /path_to_csv_file /path_to_image_Access_folder/ https://s3-region.amazonaws.com/bucket s3_target_bucket true
+docker build -t="iiifs3" .
+```
+* Usage
+Adjust environment variables in `env.list` before running the script.
+```
+docker run --env-file ./env.list -it iiifs3
 ```
 
 ### Prerequisites
