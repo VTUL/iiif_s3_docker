@@ -3,23 +3,23 @@ This project packages [iiif_s3](https://github.com/cmoa/iiif_s3) into a docker i
 
 ## Getting Started
 * Build the docker image
+
 ```
 docker build -t="iiifs3" .
 ```
 * Usage
-Adjust environment variables in `env.list` before running the script.
+
+Adjust the environment variables in `env.list` before running the script using -
 ```
 docker run --env-file ./env.list -it iiifs3
 ```
+The variables names are self-explanatory.
 
 ### Prerequisites
 * Install [Docker](https://www.docker.com/)
 
-### Installing
-* Build the docker image
-```
-docker build -t="iiifs3" .
-```
+### Testing
+Add your `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` and change `SRC_BUCKET` and `DEST_BUCKET` to something you have access to and it should run. Adjust other variables as necessary.
 
 ## Contributing
 
