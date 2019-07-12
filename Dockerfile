@@ -5,4 +5,4 @@ RUN apt-get update && apt-get install -y imagemagick awscli
 RUN gem install --no-user-install --no-document iiif_s3
 
 COPY . .
-CMD ["./createiiif.sh"]
+ENTRYPOINT ["/usr/local/iiif/createiiif.sh"]
