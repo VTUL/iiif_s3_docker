@@ -1,20 +1,29 @@
 # IIIF_S3 docker
-This project packages [iiif_s3](https://github.com/cmoa/iiif_s3) into a docker image
+This project packages [image-iiif-s3](https://github.com/VTUL/image-iiif-s3) into a docker image
 
 ## Getting Started
-* Usage
-```
-docker run  --env AWS_ACCESS_KEY_ID=**** -e AWS_SECRET_ACCESS_KEY="****" -e AWS_BUCKET_NAME=s3_bucket_name -e AWS_REGION=region -it -v mount_path docker_image ./createiiif.sh /path_to_csv_file /path_to_image_Access_folder/ https://s3-region.amazonaws.com/bucket s3_target_bucket true
-```
-
-### Prerequisites
-* Install [Docker](https://www.docker.com/)
-
-### Installing
 * Build the docker image
 ```
-docker build -t="iiifs3" .
+docker build -t="docker_image" .
 ```
+
+* Usage
+```
+docker run --env-file ./env.list -it -v mount_path:container_path docker_image
+```
+
+* Environment variables
+	* AWS_ACCESS_KEY_ID: AWS access keys
+	* AWS_SECRET_ACCESS_KEY: AWS secret access key
+	* AWS_REGION: AWS region, e.g. us-east-1
+	* AWS_BUCKET_NAME: S3 bucket name
+	* ACCESS_DIR: /path_to_image_folder to be processed
+	* DEST_FOLDER: Target folder inside the S3 bucket (AWS_BUCKET_NAME)
+	* CSV_NAME: A [CSV file](examples/example.csv) with title and description of the images
+	* DEST_URL: Root URL for accessing the manifests e.g. https://s3.amazonaws.com/iiif-example
+	* UPLOAD_BOOL: upload tiles and manifests to S3 (true|false)
+
+* Enviornment variables file: [env.list](env.list)
 
 ## Contributing
 
@@ -36,3 +45,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 * [iiif_s3](https://github.com/cmoa/iiif_s3)
+* [image-iiif-s3](https://github.com/VTUL/image-iiif-s3)
