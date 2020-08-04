@@ -2,6 +2,8 @@ require 'iiif_s3'
 require 'open-uri'
 require_relative 'lib/iiif_s3/manifest_override'
 IiifS3::Manifest.prepend IiifS3::ManifestOverride
+require_relative 'lib/iiif_s3/image_tile_override'
+IiifS3::ImageTile.prepend IiifS3::ImageTileOverride
 
 # Create directories on local disk for manifests/tiles to upload them to S3
 def create_directories(path)
@@ -45,8 +47,7 @@ def add_image(file, id)
     "is_master" => page_num == 1,
     "page_number" => page_num,
     "is_document" => false,
-    "description" => description,
-    "attribution" => "Special Collections, University Libraries, Virginia Tech",
+    "description" => description
   }  
 
   obj["section"] = "p#{page_num}"
