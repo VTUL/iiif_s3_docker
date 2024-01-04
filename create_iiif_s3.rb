@@ -66,7 +66,7 @@ end
 
 options = {}
 optparse = OptionParser.new do |parser|
-  parser.banner = "Usage: create_iiif_s3.rb -c collection_identifer -m csv_metadata_file -i image_folder_path -b metadata_base_path -r dest_dest_root_folder"
+  parser.banner = "Usage: create_iiif_s3.rb -c collection_identifer -m csv_metadata_file -i image_folder_path -b metadata_base_path -r dest_root_folder"
 
   # short option, long option, description of the option
   parser.on("-c", "--collection_identifier ID", "Parent collection identifier") do |collection_identifier|
