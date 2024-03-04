@@ -4,7 +4,7 @@ This project packages [image-iiif-s3](https://github.com/VTUL/image-iiif-s3) int
 ## Getting Started
 * Build the docker image
 ```
-docker build -t="docker_image" .
+docker build -t="docker_image" --platform linux/amd64 .
 ```
 
 * Usage
