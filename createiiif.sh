@@ -24,9 +24,11 @@ echo "CSV_NAME: -m ${CSV_NAME}"
 echo "ACCESS_DIR: -i ${ACCESS_DIR}"
 echo "DEST_URL: -b ${DEST_URL}"
 echo "DEST_PREFIX -r: ${DEST_PREFIX}"
+echo "========================================"
 
 AWS_BUCKET_NAME=${AWS_DEST_BUCKET} \
 ruby create_iiif_s3.rb \
+    -t ${TMPDIR} \
     -s ${AWS_SRC_BUCKET} \
     -d ${AWS_DEST_BUCKET} \
     -c ${COLLECTION_IDENTIFIER} \
