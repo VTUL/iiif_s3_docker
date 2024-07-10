@@ -40,10 +40,13 @@ def get_metadata(csv_url, id)
 end
 
 def get_s3_filelist_for_item(s3, options)
+  puts s3
   resp = s3.list_objects_v2({
     bucket: options[:source_bucket],
     prefix: options[:image_folder]
   })
+  puts "resp:"
+  puts resp.inspect
   return resp.contents.map{ |f| f.key }
 end
 
@@ -123,14 +126,16 @@ FileUtils.mkdir_p(options[:tmp_dir]) unless !options[:tmp_dir].nil? && Dir.exist
 # s3 upload is handled in the bash calling script after tiling completes
 options[:upload_to_s3] = false
 
+# for key in ENV.keys
+#   puts "#{key} = #{ENV[key]}"
+# end
 
-credentials = Aws::AssumeRoleCredentials.new(
-  role_arn: "arn:aws:iam::aws:policy/AmazonS3FullAccess",
-  role_session_name: Time.now.to_s.gsub(" ", "_")
-)
+ecs_credentials = Aws::ECSCredentials.new({
+  credential_path: ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI']
+})
 s3_client = Aws::S3::Client.new(
   region: "us-east-1",
-  credentials: credentials
+  credentials: ecs_credentials
 )
 s3_resource = Aws::S3::Resource.new(client: s3_client)
 
