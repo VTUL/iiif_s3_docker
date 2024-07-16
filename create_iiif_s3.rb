@@ -123,12 +123,8 @@ FileUtils.mkdir_p(options[:tmp_dir]) unless !options[:tmp_dir].nil? && Dir.exist
 # s3 upload is handled in the bash calling script after tiling completes
 options[:upload_to_s3] = false
 
-credentials = Aws::Credentials.new(ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'])
-s3_client = Aws::S3::Client.new(
-  region: "us-east-1",
-  credentials: credentials
-)
-s3_resource = Aws::S3::Resource.new(client: s3_client)
+s3_client = Aws::S3::Client.new
+s3_resource = Aws::S3::Resource.new
 
 begin
   csv_key = options[:metadata_path] + "/" + options[:metadata_file]

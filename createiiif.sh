@@ -1,6 +1,8 @@
 #!/bin/bash
 # Error out if any command fails
 set -e
+# somehow grants access to the ruby script???
+aws sts get-caller-identity
 
 # Generate random directory and enter it
 echo "Creating tmpdir:"
