@@ -1,4 +1,4 @@
-FROM ruby:3.1
+FROM ruby:2.5
 LABEL authors="Yinlin Chen <ylchen@vt.edu>, Lee Hunter <whunter@vt.edu>"
 WORKDIR /usr/local/iiif
 RUN apt-get update && apt-get install -y imagemagick awscli && rm -rf /var/lib/apt/lists/*
