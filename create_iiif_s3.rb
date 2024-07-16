@@ -171,9 +171,13 @@ id = @input_folder.split("/")[-2]
 @image_files.each_with_index do |image_file, idx|
   puts "Adding image file #{image_file} to iiif data object..."
   add_image(image_file, id, idx)
+  puts "Passing iiif data object to iiif_s3 gem for processing..."
+  iiif.load(@data)
+  iiif.process_data
+  puts "Processing complete for image file #{image_file}"
+  puts "Removing src file #{image_file} from disk..."
+  FileUtils.rm(image_file) unless image_file.nil? || !File.exists?(image_file)
 end
-puts "Passing iiif data object to iiif_s3 gem for processing..."
-iiif.load(@data)
-iiif.process_data
+
 puts "Processing complete"
 puts "Exiting job."
