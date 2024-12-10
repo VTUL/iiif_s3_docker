@@ -1,7 +1,9 @@
 #!/bin/bash
 # Error out if any command fails
 set -e
-
+echo "Running wlhunter/iiif_s3_tiling:1.0.2"
+echo ""
+echo ""
 # Generate random directory and enter it
 echo "Creating tmpdir:"
 mkdir ./tmp
@@ -15,6 +17,7 @@ mkdir -p ${ACCESS_DIR}
 # Fetch the images
 echo "Fetching images from: s3://${AWS_SRC_BUCKET}/${ACCESS_DIR}"
 # Can be helpful to remove "--quiet" flag when testing
+aws configure set default.s3.use_accelerate_endpoint true
 aws s3 sync s3://${AWS_SRC_BUCKET}/${ACCESS_DIR} ${ACCESS_DIR}
 # Fetch the CSV file
 echo "Fetching CSV file from: s3://${AWS_SRC_BUCKET}/${CSV_PATH}/${CSV_NAME}"
