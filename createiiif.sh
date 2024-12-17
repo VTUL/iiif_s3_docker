@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Error out if any command fails
-# set -e
+set -e
 
 # Generate random directory and enter it
 echo "Creating tmpdir:"
